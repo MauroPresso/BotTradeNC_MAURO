@@ -1,0 +1,42 @@
+app:
+  name: BotTradeNC AI-Native
+  timezone: UTC
+  environment: development
+
+data:
+  database_path: data/bottradenc.db
+  retention_months: 6
+
+capture:
+  interval_minutes: 10
+  providers:
+    - cmc
+    - bitfinex
+  pairs:
+    - ETH/BTC
+
+strategy:
+  name: ethbtc_noisy_lateral_conservative
+  version: 0.1.0
+  capital_base: 1000.0
+  trade_fraction: 0.25
+  profit_target_pct: 1.50
+  stop_loss_pct: 1.00
+  require_entry_still_cheap_at_trigger: true
+  max_entry_above_mnow_pct: 0.30
+  max_entry_e_pct: 0.00
+
+backtesting:
+  mode: realistic
+  fee_pct: 0.20
+  spread_pct: 0.05
+  slippage_pct: 0.05
+
+ops:
+  watchdog_stale_log_minutes: 15
+  prevent_duplicate_process: true
+
+ai:
+  enabled: false
+  store_outputs: true
+  require_human_review: true
